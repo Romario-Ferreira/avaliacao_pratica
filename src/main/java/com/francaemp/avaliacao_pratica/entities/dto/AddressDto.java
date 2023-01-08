@@ -9,7 +9,7 @@ public class AddressDto implements Serializable {
 	private String zipCode;
 	private Integer number;
 	private String city;
-	private boolean mainAddress;
+	private Boolean mainAddress;
 	
 	public AddressDto () {
 	}

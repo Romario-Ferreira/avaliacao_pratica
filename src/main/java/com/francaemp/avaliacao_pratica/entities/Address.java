@@ -3,15 +3,38 @@ package com.francaemp.avaliacao_pratica.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+@Table (name = "tb_addresses")
+@IdClass(AddressId.class)
 public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotBlank
 	private String address;
-	private String zipCode;
-	private Integer number;
-	private String city;
-	private boolean mainAddress;
 	
+	@Id
+	private String zipCode;
+	
+	@Id
+	private Integer number;
+	
+	@NotBlank
+	private String city;
+	
+	@NotNull
+	private Boolean mainAddress;
+	
+	@ManyToOne
+	@JoinColumn(name = "person_id")
 	private Person person;
 	
 	public Address() {
@@ -89,7 +112,5 @@ public class Address implements Serializable{
 		Address other = (Address) obj;
 		return Objects.equals(number, other.number) && Objects.equals(zipCode, other.zipCode);
 	}
-	
-
 
 }
