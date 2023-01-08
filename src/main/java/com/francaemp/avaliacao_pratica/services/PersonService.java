@@ -3,6 +3,8 @@ package com.francaemp.avaliacao_pratica.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.francaemp.avaliacao_pratica.entities.Person;
@@ -27,6 +29,10 @@ public class PersonService {
 	public Person findById (Long id) {
 		var person = personRepository.findById(id);
 		return person.orElseThrow(() ->  new ObjectNotFoundException("Objeto não encontrado"));
+	}
+	
+	public Page<Person> findAll(Pageable pageable){
+		return personRepository.findAll(pageable);
 	}
 	
 	public List<Person> findAll(){

@@ -31,7 +31,6 @@ public class Person implements Serializable{
 	private String name;
 	
 	@NotNull
-	@JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 	
 	@OneToMany(mappedBy = "person")
