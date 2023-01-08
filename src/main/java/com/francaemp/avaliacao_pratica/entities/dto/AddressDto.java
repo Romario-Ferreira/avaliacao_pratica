@@ -1,9 +1,8 @@
-package com.francaemp.avaliacao_pratica.entities;
+package com.francaemp.avaliacao_pratica.entities.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
 
-public class Address implements Serializable{
+public class AddressDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String address;
@@ -12,12 +11,10 @@ public class Address implements Serializable{
 	private String city;
 	private boolean mainAddress;
 	
-	private Person person;
-	
-	public Address() {
+	public AddressDto () {
 	}
 
-	public Address(String address, String zipCode, Integer number, String city, boolean mainAddress) {
+	public AddressDto(String address, String zipCode, Integer number, String city, boolean mainAddress) {
 		this.address = address;
 		this.zipCode = zipCode;
 		this.number = number;
@@ -64,32 +61,6 @@ public class Address implements Serializable{
 	public void setMainAddress(boolean mainAddress) {
 		this.mainAddress = mainAddress;
 	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(number, zipCode);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Address other = (Address) obj;
-		return Objects.equals(number, other.number) && Objects.equals(zipCode, other.zipCode);
-	}
-	
 
 
 }
