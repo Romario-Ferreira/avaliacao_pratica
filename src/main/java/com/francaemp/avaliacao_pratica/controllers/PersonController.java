@@ -50,8 +50,10 @@ public class PersonController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<Person>> findAll(Pageable pageable){
-		return ResponseEntity.ok(personService.findAll(pageable));
+	public ResponseEntity<Page<PersonDto>> findAll(Pageable pageable){
+		Page<Person> pagePerson = personService.findAll(pageable);
+		Page<PersonDto> pagePersonDto = pagePerson.map(x -> new PersonDto(x));
+		return ResponseEntity.ok(pagePersonDto);
 		
 	}
 }
