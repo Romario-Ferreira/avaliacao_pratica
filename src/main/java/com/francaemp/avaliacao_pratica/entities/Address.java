@@ -31,7 +31,7 @@ public class Address implements Serializable{
 	private String city;
 	
 	@NotNull
-	private Boolean mainAddress;
+	private boolean mainAddress;
 	
 	@ManyToOne
 	@JoinColumn(name = "person_id")

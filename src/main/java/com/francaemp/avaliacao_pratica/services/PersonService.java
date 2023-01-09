@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.francaemp.avaliacao_pratica.entities.Person;
 import com.francaemp.avaliacao_pratica.entities.dto.PersonDto;
-import com.francaemp.avaliacao_pratica.repositories.AddressRepository;
 import com.francaemp.avaliacao_pratica.repositories.PersonRepository;
 import com.francaemp.avaliacao_pratica.services.exceptions.ObjectNotFoundException;
 
@@ -18,10 +17,7 @@ public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
-	
-	@Autowired
-	private AddressRepository addressRepository;
-	
+		
 	public Person createPerson (Person person) {
 		return personRepository.save(person);
 	}
