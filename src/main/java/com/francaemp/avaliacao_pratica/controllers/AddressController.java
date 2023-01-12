@@ -18,6 +18,8 @@ import com.francaemp.avaliacao_pratica.entities.Address;
 import com.francaemp.avaliacao_pratica.entities.dto.AddressDto;
 import com.francaemp.avaliacao_pratica.services.AddressService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping(value = "/addresses")
 public class AddressController {
@@ -26,6 +28,7 @@ public class AddressController {
 	private AddressService addressService;
 	
 	@PostMapping(value = "/{id}/createaddress")
+	@Operation(summary = "Create a Address for Person using id")
 	public ResponseEntity<Void> createAddressForPerson (@PathVariable Long id, @RequestBody AddressDto addressDto){
 		var address = addressService.createAddressForPerson(id, addressService.convertDto(addressDto));
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{zipCode}/{number}").buildAndExpand(address.getZipCode(),address.getNumber()).toUri();
@@ -33,6 +36,7 @@ public class AddressController {
 	}
 	
 	@GetMapping(value = "/{id}")
+	@Operation(summary = "Find all Person adresses by id")
 	public ResponseEntity<Page<AddressDto>> findAllAddressById(@PathVariable Long id, Pageable pageable){
 		Page<Address> pageAddress = addressService.findAllAddressById(id, pageable);
 		Page<AddressDto> pageAddressDto = pageAddress.map(x -> new AddressDto(x));
@@ -40,6 +44,7 @@ public class AddressController {
 	}
 	
 	@GetMapping(value = "/{id}/mainaddress")
+	@Operation(summary = "Find main address by person id")
 	public ResponseEntity<AddressDto> findMainAddressById (@PathVariable Long id){
 		var mainAddressDto = new AddressDto(addressService.findMainAddressById(id));
 		return ResponseEntity.ok().body(mainAddressDto);

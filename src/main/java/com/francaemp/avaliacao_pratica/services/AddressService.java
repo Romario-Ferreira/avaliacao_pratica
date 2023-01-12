@@ -47,8 +47,6 @@ public class AddressService {
 		throw new MainAddressException("There is no registered main address for this id");
 	}
 
-
-	
 	public Address convertDto(AddressDto addressDto) {
 		var address = new Address(
 				addressDto.getAddress(),

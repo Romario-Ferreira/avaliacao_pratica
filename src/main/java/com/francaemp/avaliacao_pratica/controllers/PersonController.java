@@ -21,6 +21,8 @@ import com.francaemp.avaliacao_pratica.entities.Person;
 import com.francaemp.avaliacao_pratica.entities.dto.PersonDto;
 import com.francaemp.avaliacao_pratica.services.PersonService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping(value = "/persons")
 public class PersonController {
@@ -29,6 +31,7 @@ public class PersonController {
 	private PersonService personService;
 
 	@PostMapping
+	@Operation(summary = "Create a new Person")
 	public ResponseEntity<Void> createPerson(@RequestBody PersonDto personDto) {
 		var person = personService.convertPersonDto(personDto);
 		person = personService.createPerson(person);
@@ -37,6 +40,7 @@ public class PersonController {
 	}
 
 	@PutMapping(value = "/{id}/update")
+	@Operation(summary = "Update a Person")
 	public ResponseEntity<Void> updatePerson(@PathVariable Long id, @RequestBody PersonDto personDto) {
 		var person = personService.findById(id);
 		BeanUtils.copyProperties(personDto, person);
@@ -46,11 +50,13 @@ public class PersonController {
 	}
 	
 	@GetMapping(value = "/{id}")
+	@Operation(summary = "Find a Person by id")
 	public ResponseEntity<PersonDto> findById(@PathVariable Long id){
 		return ResponseEntity.ok(new PersonDto (personService.findById(id)));
 	}
 	
 	@GetMapping
+	@Operation(summary = "Find all Persons")
 	public ResponseEntity<Page<PersonDto>> findAll(Pageable pageable){
 		Page<Person> pagePerson = personService.findAll(pageable);
 		Page<PersonDto> pagePersonDto = pagePerson.map(x -> new PersonDto(x));
@@ -58,6 +64,7 @@ public class PersonController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
+	@Operation(summary = "Delete a Person")
 	public ResponseEntity<Void> deleteById (@PathVariable Long id){
 		personService.deletePersonById(id);
 		return ResponseEntity.noContent().build();
