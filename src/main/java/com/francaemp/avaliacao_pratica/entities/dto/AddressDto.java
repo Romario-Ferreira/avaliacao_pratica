@@ -2,6 +2,8 @@ package com.francaemp.avaliacao_pratica.entities.dto;
 
 import java.io.Serializable;
 
+import com.francaemp.avaliacao_pratica.entities.Address;
+
 public class AddressDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +23,13 @@ public class AddressDto implements Serializable {
 		this.city = city;
 		this.mainAddress = mainAddress;
 	}
+
+	public AddressDto(Address address) {
+		this.address = address.getAddress();
+		this.zipCode = address.getZipCode();
+		this.number = address.getNumber();
+		this.city = address.getCity();
+		this.mainAddress = address.isMainAddress();	}
 
 	public String getAddress() {
 		return address;
