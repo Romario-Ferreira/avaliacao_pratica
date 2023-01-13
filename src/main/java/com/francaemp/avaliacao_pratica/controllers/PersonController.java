@@ -33,13 +33,13 @@ public class PersonController {
 	@PostMapping
 	@Operation(summary = "Create a new Person")
 	public ResponseEntity<Void> createPerson(@RequestBody PersonDto personDto) {
-		var person = personService.convertPersonDto(personDto);
-		person = personService.createPerson(person);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(person.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+			var person = personService.convertPersonDto(personDto);
+			person = personService.createPerson(person);	
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(person.getId()).toUri();		
+			return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping(value = "/{id}/update")
+	@PutMapping(value = "/{id}")
 	@Operation(summary = "Update a Person")
 	public ResponseEntity<Void> updatePerson(@PathVariable Long id, @RequestBody PersonDto personDto) {
 		var person = personService.findById(id);

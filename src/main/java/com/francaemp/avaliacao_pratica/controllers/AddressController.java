@@ -27,7 +27,7 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
-	@PostMapping(value = "/{id}/createaddress")
+	@PostMapping(value = "/{id}")
 	@Operation(summary = "Create a Address for Person using id")
 	public ResponseEntity<Void> createAddressForPerson (@PathVariable Long id, @RequestBody AddressDto addressDto){
 		var address = addressService.createAddressForPerson(id, addressService.convertDto(addressDto));
